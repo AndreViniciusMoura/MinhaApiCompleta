@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\app\" />
     <Folder Include="wwwroot\imagens\" />
   </ItemGroup>
 
