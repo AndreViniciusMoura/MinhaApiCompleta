@@ -34,6 +34,8 @@ namespace MinhaApiCompleta.Api
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddIdentityConfiguration(Configuration);
+
             services.AddAutoMapper(typeof(Startup));
 
             services.WebApiConfig();
@@ -54,6 +56,7 @@ namespace MinhaApiCompleta.Api
                 app.UseHsts();
             }
 
+            app.UseAuthentication();
             app.UseMvcConfiguration();
         }
     }
