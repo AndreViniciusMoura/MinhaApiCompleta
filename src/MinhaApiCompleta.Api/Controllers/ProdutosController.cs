@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MinhaApiCompleta.Api.Extensions;
@@ -15,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace MinhaApiCompleta.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class ProdutosController : MainController
     {
