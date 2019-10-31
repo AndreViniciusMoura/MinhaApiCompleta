@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MinhaApiCompleta.Api.Extensions;
 using MinhaApiCompleta.Api.ViewModels;
 using MinhaApiCompleta.Business.Intefaces;
 using MinhaApiCompleta.Business.Intefaces.Repositories;
@@ -59,6 +60,7 @@ namespace MinhaApiCompleta.Api.Controllers
             return produtoViewModel;
         }
 
+        [ClaimsAuthorize("Produto", "Adicionar")]
         [HttpPost]
         public async Task<ActionResult<ProdutoViewModel>> Adicionar(ProdutoViewModel produtoViewModel)
         {
@@ -77,6 +79,7 @@ namespace MinhaApiCompleta.Api.Controllers
             return CustomResponse(produtoViewModel);
         }
 
+        [ClaimsAuthorize("Produto", "Atualizar")]
         [HttpPut("{id:guid}")]
         public async Task<IActionResult> Atualizar(Guid id, ProdutoViewModel produtoViewModel)
         {
@@ -113,6 +116,7 @@ namespace MinhaApiCompleta.Api.Controllers
             return CustomResponse(produtoViewModel);
         }
 
+        [ClaimsAuthorize("Produto", "Adicionar")]
         [RequestSizeLimit(40000000)]
         [HttpPost("Adicionar")]
         public async Task<ActionResult<ProdutoViewModel>> AdicionarAlternativo(ProdutoImagemViewModel produtoImagemViewModel)
@@ -133,6 +137,7 @@ namespace MinhaApiCompleta.Api.Controllers
             return CustomResponse(produtoImagemViewModel);
         }
 
+        [ClaimsAuthorize("Produto", "Excluir")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<ProdutoViewModel>> Excluir(Guid id)
         {
