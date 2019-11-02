@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using MinhaApiCompleta.Business.Intefaces;
+using MinhaApiCompleta.Business.Intefaces.Services;
 using MinhaApiCompleta.Business.Notificacoes;
+using System;
 using System.Linq;
 
 namespace MinhaApiCompleta.Api.Controllers
@@ -12,13 +14,26 @@ namespace MinhaApiCompleta.Api.Controllers
         #region Propriedades
 
         private readonly INotificador _notificador;
+        public readonly IUserService _appUser;
+
+        protected Guid UsuarioId { get; set; }
+
+        protected bool UsuarioAutenticado { get; set; }
 
         #endregion
 
         #region Contrutor
-        public MainController(INotificador notificador)
+        public MainController(INotificador notificador
+            , IUserService appUser)
         {
             _notificador = notificador;
+            _appUser = appUser;
+
+            if (_appUser.IsAuthenticated())
+            {
+                UsuarioId = _appUser.GetUserId();
+                UsuarioAutenticado = true;
+            }
         }
 
         #endregion

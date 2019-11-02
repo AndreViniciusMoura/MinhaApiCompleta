@@ -15,19 +15,19 @@ namespace MinhaApiCompleta.Business.Services
         #region Propriedades
 
         private readonly IProdutoRepository _produtoRepository;
-        //private readonly IUser _user;
+        private readonly IUserService _userService;
 
         #endregion
 
         #region Construtor
 
         public ProdutoService(IProdutoRepository produtoRepository,
-                              INotificador notificador
-                              //IUser user
+                              INotificador notificador, 
+                              IUserService userService
                               ) : base(notificador)
         {
             _produtoRepository = produtoRepository;
-            //_user = user;
+            _userService = userService;
         }
 
         #endregion
@@ -38,7 +38,7 @@ namespace MinhaApiCompleta.Business.Services
         {
             if (!ExecutarValidacao(new ProdutoValidation(), produto)) return;
 
-            //var user = _user.GetUserId();
+            var user = _userService.GetUserId();
 
             await _produtoRepository.Adicionar(produto);
         }

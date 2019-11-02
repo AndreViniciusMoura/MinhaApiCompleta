@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using MinhaApiCompleta.Api.Extensions;
 using MinhaApiCompleta.Business.Intefaces;
 using MinhaApiCompleta.Business.Intefaces.Repositories;
 using MinhaApiCompleta.Business.Intefaces.Services;
@@ -15,11 +17,14 @@ namespace MinhaApiCompleta.Api.Configuration
         {
             services.AddScoped<MeuDbContext>();
             services.AddScoped<INotificador, Notificador>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             #region Services
 
             services.AddScoped<IFornecedorService, FornecedorService>();
-            services.AddScoped<IProdutoService, ProdutoService>();            
+            services.AddScoped<IProdutoService, ProdutoService>();
+            services.AddScoped<IUserService, AspNetUser>();
+
 
             #endregion
 

@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using MinhaApiCompleta.Api.Extensions;
 using MinhaApiCompleta.Api.ViewModels;
 using MinhaApiCompleta.Business.Intefaces;
+using MinhaApiCompleta.Business.Intefaces.Services;
 
 namespace MinhaApiCompleta.Api.Controllers
 {
@@ -31,7 +32,8 @@ namespace MinhaApiCompleta.Api.Controllers
         public AuthController(INotificador notificador,
                               SignInManager<IdentityUser> signInManager,
                               UserManager<IdentityUser> userManager,
-                              IOptions<AppSettings> appSettings) : base(notificador)
+                              IOptions<AppSettings> appSettings,
+                              IUserService userService) : base(notificador, userService)
         {
             _signInManager = signInManager;
             _userManager = userManager;

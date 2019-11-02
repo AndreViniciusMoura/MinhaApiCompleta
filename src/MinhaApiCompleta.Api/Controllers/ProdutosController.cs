@@ -33,7 +33,8 @@ namespace MinhaApiCompleta.Api.Controllers
         public ProdutosController(INotificador notificador,
                                   IProdutoRepository produtoRepository,
                                   IProdutoService produtoService,
-                                  IMapper mapper) : base(notificador)
+                                  IMapper mapper,
+                                  IUserService userService) : base(notificador, userService)
         {
             _produtoRepository = produtoRepository;
             _produtoService = produtoService;

@@ -19,13 +19,22 @@ namespace MinhaApiCompleta.Api.Configuration
                 options.SuppressModelStateInvalidFilter = true;
             });
 
-            services.AddCors(Options =>
+            services.AddCors(options =>
             {
-                Options.AddPolicy("Development", builder =>
+                options.AddPolicy("Development", builder =>
                                                     builder.AllowAnyOrigin()
                                                     .AllowAnyMethod()
                                                     .AllowAnyHeader()
                                                     .AllowCredentials());
+
+                options.AddPolicy("Production",
+                    builder =>
+                        builder
+                            .AllowAnyMethod()
+                            .WithOrigins("http://localhost:4200")
+                            .SetIsOriginAllowedToAllowWildcardSubdomains()
+                            //.WithHeaders(HeaderNames.ContentType, "x-custom-header")
+                            .AllowAnyHeader());
             });
 
             return services;
@@ -33,7 +42,6 @@ namespace MinhaApiCompleta.Api.Configuration
 
         public static IApplicationBuilder UseMvcConfiguration(this IApplicationBuilder app)
         {
-            app.UseCors("Development");
             app.UseHttpsRedirection();
             app.UseMvc();
 

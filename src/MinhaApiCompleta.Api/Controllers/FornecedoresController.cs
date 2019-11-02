@@ -33,7 +33,8 @@ namespace MinhaApiCompleta.Api.Controllers
                                       IFornecedorRepository fornecedorRepository,
                                       IEnderecoRepository enderecoRepository,
                                       INotificador notificador,
-                                      IMapper mapper) : base(notificador)
+                                      IMapper mapper,
+                                      IUserService userService) : base(notificador, userService)
         {
             _fornecedorRepository = fornecedorRepository;
             _fornecedorService = fornecedorService;
