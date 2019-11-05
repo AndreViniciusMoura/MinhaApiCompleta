@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -13,13 +6,20 @@ using MinhaApiCompleta.Api.Extensions;
 using MinhaApiCompleta.Api.ViewModels;
 using MinhaApiCompleta.Business.Intefaces;
 using MinhaApiCompleta.Business.Intefaces.Services;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace MinhaApiCompleta.Api.Controllers
+namespace MinhaApiCompleta.Api.Controllers.V1
 {
-    [Route("api")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}")]
     public class AuthController : MainController
     {
-        #region Properties
+        #region Propriedades
 
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
@@ -27,7 +27,7 @@ namespace MinhaApiCompleta.Api.Controllers
 
         #endregion
 
-        #region Contructor
+        #region Construtor
 
         public AuthController(INotificador notificador,
                               SignInManager<IdentityUser> signInManager,
@@ -42,7 +42,7 @@ namespace MinhaApiCompleta.Api.Controllers
 
         #endregion
 
-        #region Methods
+        #region Metodos
 
         [HttpPost("nova-conta")]
         public async Task<ActionResult> Registrar(RegisterUserViewModel registerUser)

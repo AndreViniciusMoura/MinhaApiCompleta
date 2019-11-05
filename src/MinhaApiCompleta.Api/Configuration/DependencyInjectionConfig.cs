@@ -8,6 +8,8 @@ using MinhaApiCompleta.Business.Notificacoes;
 using MinhaApiCompleta.Business.Services;
 using MinhaApiCompleta.Data.Context;
 using MinhaApiCompleta.Data.Repository;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Microsoft.Extensions.Options;
 
 namespace MinhaApiCompleta.Api.Configuration
 {
@@ -18,6 +20,7 @@ namespace MinhaApiCompleta.Api.Configuration
             services.AddScoped<MeuDbContext>();
             services.AddScoped<INotificador, Notificador>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 
             #region Services
 

@@ -11,10 +11,11 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MinhaApiCompleta.Api.Controllers
+namespace MinhaApiCompleta.Api.Controllers.V1
 {
     [Authorize]
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class FornecedoresController : MainController
     {
         #region Propriedades
@@ -116,14 +117,14 @@ namespace MinhaApiCompleta.Api.Controllers
             return CustomResponse(fornecedorViewModel);
         }
 
-        [HttpGet("obter-endereco/{id:guid}")]
+        [HttpGet("endereco/{id:guid}")]
         public async Task<EnderecoViewModel> ObterEnderecoPorId(Guid id)
         {
             return _mapper.Map<EnderecoViewModel>(await _enderecoRepository.ObterPorId(id));
         }
 
         [ClaimsAuthorize("Fornecedor", "Atualizar")]
-        [HttpPut("atualizar-endereco/{id:guid}")]
+        [HttpPut("endereco/{id:guid}")]
         public async Task<IActionResult> AtualizarEndereco(Guid id, EnderecoViewModel enderecoViewModel)
         {
             if (id != enderecoViewModel.Id)

@@ -9,15 +9,15 @@ using MinhaApiCompleta.Business.Intefaces.Repositories;
 using MinhaApiCompleta.Business.Intefaces.Services;
 using MinhaApiCompleta.Business.Models;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace MinhaApiCompleta.Api.Controllers
+namespace MinhaApiCompleta.Api.Controllers.V1
 {
     [Authorize]
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class ProdutosController : MainController
     {
         #region Propriedades
