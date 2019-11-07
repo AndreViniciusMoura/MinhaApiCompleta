@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using MinhaApiCompleta.Api.Extensions;
@@ -24,6 +25,7 @@ namespace MinhaApiCompleta.Api.Controllers.V1
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly AppSettings _appSettings;
+        private readonly ILogger _logger;
 
         #endregion
 
@@ -33,11 +35,13 @@ namespace MinhaApiCompleta.Api.Controllers.V1
                               SignInManager<IdentityUser> signInManager,
                               UserManager<IdentityUser> userManager,
                               IOptions<AppSettings> appSettings,
-                              IUserService userService) : base(notificador, userService)
+                              IUserService userService,
+                              ILogger<AuthController> logger) : base(notificador, userService)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _appSettings = appSettings.Value;
+            _logger = logger;
         }
 
         #endregion
@@ -75,12 +79,15 @@ namespace MinhaApiCompleta.Api.Controllers.V1
         [HttpPost("entrar")]
         public async Task<ActionResult> Login(LoginUserViewModel loginUser)
         {
+            throw new Exception("Erro");
+
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
             var result = await _signInManager.PasswordSignInAsync(loginUser.Email, loginUser.Password, false, true);
 
             if (result.Succeeded)
             {
+                _logger.LogWarning($"Usuário {loginUser.Email} logado com sucesso");
                 return CustomResponse(await GerarJwt(loginUser.Email));
             }
 

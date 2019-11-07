@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MinhaApiCompleta.Api.Configuration;
+using MinhaApiCompleta.Api.Extensions;
 using MinhaApiCompleta.Data.Context;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -44,6 +45,8 @@ namespace MinhaApiCompleta.Api
 
             services.AddSwaggerConfig();
 
+            services.AddLoggingConfiguration();
+
             services.ResolveDependencies();
         }
 
@@ -64,9 +67,14 @@ namespace MinhaApiCompleta.Api
             }
 
             app.UseAuthentication();
+
+            app.UseMiddleware<ExceptionMiddleware>();
+
             app.UseMvcConfiguration();
 
             app.UseSwaggerConfig(provider);
+
+            app.UseLoggingConfiguration();
         }
     }
 }
