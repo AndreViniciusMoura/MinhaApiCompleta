@@ -79,8 +79,6 @@ namespace MinhaApiCompleta.Api.Controllers.V1
         [HttpPost("entrar")]
         public async Task<ActionResult> Login(LoginUserViewModel loginUser)
         {
-            throw new Exception("Erro");
-
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
             var result = await _signInManager.PasswordSignInAsync(loginUser.Email, loginUser.Password, false, true);
