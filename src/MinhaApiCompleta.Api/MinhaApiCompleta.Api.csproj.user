@@ -9,9 +9,9 @@
     <WebStackScaffolding_IsReferencingScriptLibrariesSelected>True</WebStackScaffolding_IsReferencingScriptLibrariesSelected>
     <WebStackScaffolding_LayoutPageFile />
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
-    <ActiveDebugProfile>IIS - Dev</ActiveDebugProfile>
+    <ActiveDebugProfile>IIS - Prod</ActiveDebugProfile>
     <ShowAllFiles>true</ShowAllFiles>
-    <NameOfLastUsedPublishProfile>PastaLocal</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>MinhaApiCompletaApi - Web Deploy</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
