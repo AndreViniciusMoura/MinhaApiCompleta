@@ -31,10 +31,14 @@ namespace MinhaApiCompleta.Api.Configuration
 
             #endregion
 
+            #region Disable Error Model State
+
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.SuppressModelStateInvalidFilter = true;
             });
+
+            #endregion
 
             #region CORS
 
